@@ -1,0 +1,1196 @@
+openapi: 3.0.3
+info:
+  title: Assets API
+  version: 2.0.0a
+servers:
+  - url: >-
+      https://a3jam2t1vd-vpce-05ca1fd51c2e7660a.execute-api.us-west-2.amazonaws.com/CA
+paths:
+  /assets/stations/{id}:
+    get:
+      tags:
+        - stations
+      summary: GET /assets/stations/{id}
+      operationId: get_station_by_id_assets_stations__id__get
+      parameters:
+        - required: true
+          schema:
+            type: string
+            title: Id
+          name: id
+          in: path
+          description: station id
+          type: string
+        - required: true
+          schema:
+            type: string
+            title: Username
+          name: username
+          in: header
+          description: user name of user
+          type: string
+      responses:
+        '200':
+          description: Station asset retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Station'
+        '404':
+          description: Station asset not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorSchema'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      description: Get information about a station
+  /assets/stations/station/{station}:
+    get:
+      tags:
+        - stations
+      summary: GET /assets/stations/station/{station}
+      operationId: get_station_by_path_assets_stations_station__station__get
+      parameters:
+        - required: true
+          schema:
+            type: string
+            title: Station
+          name: station
+          in: path
+          type: string
+        - required: true
+          schema:
+            type: string
+            title: Username
+          name: username
+          in: header
+          type: string
+      responses:
+        '200':
+          description: Station asset retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Station'
+        '404':
+          description: Station asset not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorSchema'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /assets/units/{id}:
+    get:
+      tags:
+        - units
+      summary: GET /assets/units/{id}
+      operationId: get_unit_by_id_assets_units__id__get
+      parameters:
+        - required: true
+          schema:
+            type: string
+            title: Id
+          name: id
+          in: path
+          type: string
+        - required: true
+          schema:
+            type: string
+            title: Username
+          name: username
+          in: header
+          type: string
+      responses:
+        '200':
+          description: Unit asset retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unit'
+        '404':
+          description: Unit asset not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorSchema'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /assets/units/station/{station}/unit/{unit}:
+    get:
+      tags:
+        - units
+      summary: GET /assets/units/station/{station}/unit/{unit}
+      operationId: get_unit_by_path_assets_units_station__station__unit__unit__get
+      parameters:
+        - required: true
+          schema:
+            type: string
+            title: Station
+          name: station
+          in: path
+          type: string
+        - required: true
+          schema:
+            type: string
+            title: Unit
+          name: unit
+          in: path
+          type: string
+        - required: true
+          schema:
+            type: string
+            title: Username
+          name: username
+          in: header
+          type: string
+      responses:
+        '200':
+          description: Unit asset retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unit'
+        '404':
+          description: Unit asset not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorSchema'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /assets/units/station/{station}:
+    get:
+      tags:
+        - units
+      summary: GET /assets/units/station/{station}
+      operationId: find_units_in_station_assets_units_station__station__get
+      parameters:
+        - required: true
+          schema:
+            type: string
+            title: Station
+          name: station
+          in: path
+          type: string
+        - required: true
+          schema:
+            type: string
+            title: Username
+          name: username
+          in: header
+          type: string
+      responses:
+        '200':
+          description: Unit assets retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootModel_list_Unit__'
+        '404':
+          description: Station asset not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorSchema'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /assets/components/{id}:
+    get:
+      tags:
+        - components
+      summary: GET /assets/components/{id}
+      operationId: get_component_by_id_assets_components__id__get
+      parameters:
+        - required: true
+          schema:
+            type: string
+            title: Id
+          name: id
+          in: path
+          type: string
+        - required: true
+          schema:
+            type: string
+            title: Username
+          name: username
+          in: header
+          type: string
+      responses:
+        '200':
+          description: Component asset retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Component'
+        '404':
+          description: Component asset not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorSchema'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /assets/components/station/{station}/unit/{unit}/component/{component}:
+    get:
+      tags:
+        - components
+      summary: >-
+        GET
+        /assets/components/station/{station}/unit/{unit}/component/{component}
+      operationId: >-
+        get_component_by_path_assets_components_station__station__unit__unit__component__component__get
+      parameters:
+        - required: true
+          schema:
+            type: string
+            title: Station
+          name: station
+          in: path
+          type: string
+        - required: true
+          schema:
+            type: string
+            title: Unit
+          name: unit
+          in: path
+          type: string
+        - required: true
+          schema:
+            type: string
+            title: Component
+          name: component
+          in: path
+          type: string
+        - required: true
+          schema:
+            type: string
+            title: Username
+          name: username
+          in: header
+          type: string
+      responses:
+        '200':
+          description: Component asset retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Component'
+        '404':
+          description: Component asset not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorSchema'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /assets/components/station/{station}/unit/{unit}:
+    get:
+      tags:
+        - components
+      summary: GET /assets/components/station/{station}/unit/{unit}
+      operationId: >-
+        find_components_in_unit_assets_components_station__station__unit__unit__get
+      parameters:
+        - required: true
+          schema:
+            type: string
+            title: Station
+          name: station
+          in: path
+          type: string
+        - required: true
+          schema:
+            type: string
+            title: Unit
+          name: unit
+          in: path
+          type: string
+        - required: true
+          schema:
+            type: string
+            title: Username
+          name: username
+          in: header
+          type: string
+      responses:
+        '200':
+          description: Component assets retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootModel_list_Component__'
+        '404':
+          description: Unit asset not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorSchema'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /assets/components/station/{station}:
+    get:
+      tags:
+        - components
+      summary: GET /assets/components/station/{station}
+      operationId: find_components_in_station_assets_components_station__station__get
+      parameters:
+        - required: true
+          schema:
+            type: string
+            title: Station
+          name: station
+          in: path
+          type: string
+        - required: true
+          schema:
+            type: string
+            title: Username
+          name: username
+          in: header
+          type: string
+      responses:
+        '200':
+          description: Component assets retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootModel_list_Component__'
+        '404':
+          description: Station asset not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorSchema'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /assets/subcomponents/{id}:
+    put:
+      tags:
+        - subcomponents
+      summary: PUT /assets/subcomponents/{id}
+      operationId: update_subcomponent_assets_subcomponents__id__put
+      parameters:
+        - required: true
+          schema:
+            type: string
+            title: Id
+          name: id
+          in: path
+          type: string
+        - required: true
+          schema:
+            type: string
+            title: Username
+          name: username
+          in: header
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subcomponent'
+        required: true
+      responses:
+        '200':
+          description: Subcomponent asset updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subcomponent'
+        '404':
+          description: Subcomponent asset not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorSchema'
+        '409':
+          description: Incorrect version
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorSchema'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /assets/subcomponents/station/{station}/unit/{unit}/component/{component}/subcomponent/{subcomponent}:
+    get:
+      tags:
+        - subcomponents
+      summary: >-
+        GET
+        /assets/subcomponents/station/{station}/unit/{unit}/component/{component}/subcomponent/{subcomponent}
+      operationId: >-
+        get_subcomponent_by_path_assets_subcomponents_station__station__unit__unit__component__component__subcomponent__subcomponent__get
+      parameters:
+        - required: true
+          schema:
+            type: string
+            title: Station
+          name: station
+          in: path
+          type: string
+        - required: true
+          schema:
+            type: string
+            title: Unit
+          name: unit
+          in: path
+          type: string
+        - required: true
+          schema:
+            type: string
+            title: Component
+          name: component
+          in: path
+          type: string
+        - required: true
+          schema:
+            type: string
+            title: Subcomponent
+          name: subcomponent
+          in: path
+          type: string
+        - required: true
+          schema:
+            type: string
+            title: Username
+          name: username
+          in: header
+          type: string
+      responses:
+        '200':
+          description: Subcomponent asset retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subcomponent'
+        '404':
+          description: Subcomponent asset not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorSchema'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /assets/subcomponents/station/{station}/unit/{unit}/component/{component}:
+    get:
+      tags:
+        - subcomponents
+      summary: >-
+        GET
+        /assets/subcomponents/station/{station}/unit/{unit}/component/{component}
+      operationId: >-
+        find_subcomponents_in_component_assets_subcomponents_station__station__unit__unit__component__component__get
+      parameters:
+        - required: true
+          schema:
+            type: string
+            title: Station
+          name: station
+          in: path
+          type: string
+        - required: true
+          schema:
+            type: string
+            title: Unit
+          name: unit
+          in: path
+          type: string
+        - required: true
+          schema:
+            type: string
+            title: Component
+          name: component
+          in: path
+          type: string
+        - required: true
+          schema:
+            type: string
+            title: Username
+          name: username
+          in: header
+          type: string
+      responses:
+        '200':
+          description: Subcomponent assets retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootModel_list_Subcomponent__'
+        '404':
+          description: Component asset not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorSchema'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /assets/subcomponents/station/{station}/unit/{unit}:
+    get:
+      tags:
+        - subcomponents
+      summary: GET /assets/subcomponents/station/{station}/unit/{unit}
+      operationId: >-
+        find_subcomponents_in_unit_assets_subcomponents_station__station__unit__unit__get
+      parameters:
+        - required: true
+          schema:
+            type: string
+            title: Station
+          name: station
+          in: path
+          type: string
+        - required: true
+          schema:
+            type: string
+            title: Unit
+          name: unit
+          in: path
+          type: string
+        - required: true
+          schema:
+            type: string
+            title: Username
+          name: username
+          in: header
+          type: string
+      responses:
+        '200':
+          description: Subcomponent assets retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootModel_list_Subcomponent__'
+        '404':
+          description: Unit asset not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorSchema'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /assets/subcomponents/station/{station}:
+    get:
+      tags:
+        - subcomponents
+      summary: GET /assets/subcomponents/station/{station}
+      operationId: find_subcomponents_in_station_assets_subcomponents_station__station__get
+      parameters:
+        - required: true
+          schema:
+            type: string
+            title: Station
+          name: station
+          in: path
+          type: string
+        - required: true
+          schema:
+            type: string
+            title: Username
+          name: username
+          in: header
+          type: string
+      responses:
+        '200':
+          description: Subcomponent assets retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootModel_list_Subcomponent__'
+        '404':
+          description: Station asset not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorSchema'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /assets/stations:
+    get:
+      tags:
+        - stations
+      summary: GET /assets/stations
+      operationId: find_stations_assets_stations_get
+      parameters:
+        - required: true
+          schema:
+            type: string
+            title: Username
+          name: username
+          in: header
+          type: string
+      responses:
+        '200':
+          description: Station assets retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootModel_list_Station__'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /assets/units:
+    get:
+      tags:
+        - units
+      summary: GET /assets/units
+      operationId: find_units_assets_units_get
+      parameters:
+        - required: true
+          schema:
+            type: string
+            title: Username
+          name: username
+          in: header
+          type: string
+      responses:
+        '200':
+          description: Unit assets retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootModel_list_Unit__'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /assets/components:
+    get:
+      tags:
+        - components
+      summary: GET /assets/components
+      operationId: find_components_assets_components_get
+      parameters:
+        - required: true
+          schema:
+            type: string
+            title: Username
+          name: username
+          in: header
+          type: string
+      responses:
+        '200':
+          description: Component assets retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootModel_list_Component__'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /assets/subcomponents:
+    get:
+      tags:
+        - subcomponents
+      summary: GET /assets/subcomponents
+      operationId: find_subcomponents_assets_subcomponents_get
+      parameters:
+        - required: true
+          schema:
+            type: string
+            title: Username
+          name: username
+          in: header
+          type: string
+      responses:
+        '200':
+          description: Subcomponent assets retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootModel_list_Subcomponent__'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /assets:
+    get:
+      tags:
+        - hierarchy
+      summary: GET /assets
+      operationId: get_hierarchy_assets_get
+      parameters:
+        - required: true
+          schema:
+            type: string
+            title: Username
+          name: username
+          in: header
+          type: string
+      responses:
+        '200':
+          description: Asset tree retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetTreeNode'
+        '404':
+          description: Asset tree not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorSchema'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    Aggregate:
+      type: string
+      enum:
+        - Asset
+        - Template
+    AssetAttribute:
+      properties:
+        AttributeName:
+          type: string
+          title: Attributename
+        DataType:
+          type: string
+          title: Datatype
+          default: string
+        UoM:
+          anyOf:
+            - type: string
+            - nullable: true
+          title: Uom
+        AttributeCategory:
+          type: string
+          title: Attributecategory
+          default: General
+        DisplayOrder:
+          type: integer
+          title: Displayorder
+          default: 1
+        AttributeValue:
+          anyOf:
+            - type: number
+            - type: string
+            - type: integer
+            - type: boolean
+          title: Attributevalue
+      type: object
+      required:
+        - AttributeName
+        - AttributeValue
+      title: AssetAttribute
+      description: Attribute value object for Assets.
+    AssetTreeNode:
+      properties:
+        name:
+          type: string
+          title: Name
+        asset_type:
+          type: string
+          title: Asset Type
+        id:
+          type: string
+          title: Id
+        children:
+          items:
+            $ref: '#/components/schemas/AssetTreeNode'
+          type: array
+          title: Children
+        template:
+          anyOf:
+            - type: string
+            - nullable: true
+          title: Template
+      type: object
+      required:
+        - name
+        - asset_type
+        - id
+        - children
+      title: AssetTreeNode
+      description: Asset hierarchy representation.
+    AssetType:
+      type: string
+      enum:
+        - Station
+        - Unit
+        - Component
+        - Subcomponent
+    Component:
+      properties:
+        region:
+          $ref: '#/components/schemas/Region'
+        type:
+          $ref: '#/components/schemas/Aggregate'
+          default: Asset
+        id:
+          type: string
+          title: Id
+        date_added:
+          type: string
+          title: Date Added
+        date_updated:
+          type: string
+          title: Date Updated
+        added_by:
+          type: string
+          title: Added By
+          default: Unknown
+        updated_by:
+          type: string
+          title: Updated By
+          default: Unknown
+        version:
+          type: integer
+          title: Version
+          default: 0
+        asset_type:
+          $ref: '#/components/schemas/AssetType'
+          default: Component
+        station:
+          type: string
+          title: Station
+        attributes:
+          additionalProperties:
+            $ref: '#/components/schemas/AssetAttribute'
+          type: object
+          title: Attributes
+        template_pk:
+          type: string
+          title: Template Pk
+          default: ''
+        template_sk:
+          type: string
+          title: Template Sk
+          default: ''
+        unit:
+          type: string
+          title: Unit
+        component:
+          type: string
+          title: Component
+      type: object
+      required:
+        - region
+        - station
+        - attributes
+        - unit
+        - component
+      title: Component
+      description: Component level entity.
+    DefaultErrorSchema:
+      properties:
+        error:
+          type: string
+          title: Error
+      type: object
+      required:
+        - error
+      title: DefaultErrorSchema
+      description: Default model for simple error responses.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Region:
+      type: string
+      enum:
+        - CA
+        - MX
+        - US
+    RootModel_list_Component__:
+      items:
+        $ref: '#/components/schemas/Component'
+      type: array
+      title: RootModel[list[Component]]
+    RootModel_list_Station__:
+      items:
+        $ref: '#/components/schemas/Station'
+      type: array
+      title: RootModel[list[Station]]
+    RootModel_list_Subcomponent__:
+      items:
+        $ref: '#/components/schemas/Subcomponent'
+      type: array
+      title: RootModel[list[Subcomponent]]
+    RootModel_list_Unit__:
+      items:
+        $ref: '#/components/schemas/Unit'
+      type: array
+      title: RootModel[list[Unit]]
+    Station:
+      properties:
+        region:
+          $ref: '#/components/schemas/Region'
+        type:
+          $ref: '#/components/schemas/Aggregate'
+          default: Asset
+        id:
+          type: string
+          title: Id
+        date_added:
+          type: string
+          title: Date Added
+        date_updated:
+          type: string
+          title: Date Updated
+        added_by:
+          type: string
+          title: Added By
+          default: Unknown
+        updated_by:
+          type: string
+          title: Updated By
+          default: Unknown
+        version:
+          type: integer
+          title: Version
+          default: 0
+        asset_type:
+          $ref: '#/components/schemas/AssetType'
+          default: Station
+        station:
+          type: string
+          title: Station
+        attributes:
+          additionalProperties:
+            $ref: '#/components/schemas/AssetAttribute'
+          type: object
+          title: Attributes
+        template_pk:
+          type: string
+          title: Template Pk
+          default: ''
+        template_sk:
+          type: string
+          title: Template Sk
+          default: ''
+      type: object
+      required:
+        - region
+        - station
+        - attributes
+      title: Station
+      description: Station level entity.
+    Subcomponent:
+      properties:
+        region:
+          $ref: '#/components/schemas/Region'
+        type:
+          $ref: '#/components/schemas/Aggregate'
+          default: Asset
+        id:
+          type: string
+          title: Id
+        date_added:
+          type: string
+          title: Date Added
+        date_updated:
+          type: string
+          title: Date Updated
+        added_by:
+          type: string
+          title: Added By
+          default: Unknown
+        updated_by:
+          type: string
+          title: Updated By
+          default: Unknown
+        version:
+          type: integer
+          title: Version
+          default: 0
+        asset_type:
+          $ref: '#/components/schemas/AssetType'
+          default: Subcomponent
+        station:
+          type: string
+          title: Station
+        attributes:
+          additionalProperties:
+            $ref: '#/components/schemas/AssetAttribute'
+          type: object
+          title: Attributes
+        template_pk:
+          type: string
+          title: Template Pk
+          default: ''
+        template_sk:
+          type: string
+          title: Template Sk
+          default: ''
+        unit:
+          type: string
+          title: Unit
+        component:
+          type: string
+          title: Component
+        subcomponent:
+          type: string
+          title: Subcomponent
+      type: object
+      required:
+        - region
+        - station
+        - attributes
+        - unit
+        - component
+        - subcomponent
+      title: Subcomponent
+      description: Subcomponent level entity.
+    Unit:
+      properties:
+        region:
+          $ref: '#/components/schemas/Region'
+        type:
+          $ref: '#/components/schemas/Aggregate'
+          default: Asset
+        id:
+          type: string
+          title: Id
+        date_added:
+          type: string
+          title: Date Added
+        date_updated:
+          type: string
+          title: Date Updated
+        added_by:
+          type: string
+          title: Added By
+          default: Unknown
+        updated_by:
+          type: string
+          title: Updated By
+          default: Unknown
+        version:
+          type: integer
+          title: Version
+          default: 0
+        asset_type:
+          $ref: '#/components/schemas/AssetType'
+          default: Unit
+        station:
+          type: string
+          title: Station
+        attributes:
+          additionalProperties:
+            $ref: '#/components/schemas/AssetAttribute'
+          type: object
+          title: Attributes
+        template_pk:
+          type: string
+          title: Template Pk
+          default: ''
+        template_sk:
+          type: string
+          title: Template Sk
+          default: ''
+        unit:
+          type: string
+          title: Unit
+      type: object
+      required:
+        - region
+        - station
+        - attributes
+        - unit
+      title: Unit
+      description: Unit level entity.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+              - type: string
+              - type: integer
+          type: array
+          title: Location
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+        - loc
+        - msg
+        - type
+      title: ValidationError
+  securitySchemes:
+    apikey:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+security:
+  - apikey: []
+securityDefinitions: {}
+host: a3jam2t1vd-vpce-05ca1fd51c2e7660a.execute-api.us-west-2.amazonaws.com
+basePath: /CA
